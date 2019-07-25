@@ -1,5 +1,5 @@
 body {
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 div {
@@ -32,6 +32,11 @@ div {
       height: 5vh;
       display: flex;
       justify-content: center;
+  }
+
+  #results-div {
+      display: grid;
+      
   }
 
   
