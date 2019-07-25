@@ -13,9 +13,6 @@ $(document).ready(function () {
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
 
-    // Get a reference to the database service
-    var database = firebase.database();
-
     var vidRef = firebase.database().ref('vids/');
     vidRef.on('value', function (snapshot) {
         console.log(snapshot.val().vidId);

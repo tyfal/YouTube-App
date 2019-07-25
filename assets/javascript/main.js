@@ -13,9 +13,6 @@ $(document).ready(function () {
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
 
-    // Get a reference to the database service
-    var database = firebase.database();
-
     $("#search-btn").click(function (e) {
 
         e.preventDefault();
@@ -40,7 +37,6 @@ $(document).ready(function () {
                 for (var i = 0; i < response.items.length; i++) {
                     var id = response.items[i].id.videoId;
                     var thumb = response.items[i].snippet.thumbnails.default.url;
-                    // var vid = getVid(id);
                     var img = getVidOption(thumb, id);
                     $("#results-container").append(img);
                 }
@@ -50,25 +46,35 @@ $(document).ready(function () {
 
     });
 
-    $("img").click(function() {
-        console.log("clicked!");
-    });
-
 });
 
 
+/**
+ * Returns thumbnail for search and applies database functionality
+ *
+ * @param {string} thumb
+ * @param {string} id
+ * @returns
+ */
 function getVidOption(thumb, id) {
 
     var img = $("<img>");
     img.attr("src", thumb);
     img.attr("vidId", id);
-    img.click(function() {writeVidData(id)});
+    img.click(function() {
+        writeVidData(id);
+    });
 
     return img;
 
 }
 
 
+/**
+ * Write id to database
+ *
+ * @param {string} id
+ */
 function writeVidData(id) {
     firebase.database().ref('vids/').set({
       vidId: id
